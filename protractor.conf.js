@@ -3,6 +3,7 @@
 // https://github.com/angular/protractor/blob/master/lib/config.ts
 
 const { SpecReporter } = require('jasmine-spec-reporter');
+const os = require("os");
 
 /**
  * @type { import("protractor").Config }
@@ -12,6 +13,7 @@ exports.config = {
   specs: [
     './src/e2e/*.ts'
   ],
+  chromeDriver: whereIsChromeDriver(),
   capabilities: {
     browserName: 'chrome',
     chromeOptions: {
@@ -28,7 +30,6 @@ exports.config = {
   SELENIUM_PROMISE_MANAGER: false,
 
   directConnect: true,
-  //seleniumServerJar: 'node_modules/protractor/node_modules/webdriver-manager/selenium/selenium-server-standalone-3.141.59.jar',
 
   baseUrl: 'http://localhost:4200/',
 
@@ -58,3 +59,17 @@ exports.config = {
     browser.manage().timeouts().implicitlyWait(2000);
   }
 };
+
+function whereIsChromeDriver() {
+  if (isMac()) {
+    return './chromedriver-mac-x64/chromedriver';
+  }
+  else{
+    return './chromedriver-win32/chromedriver.exe';
+  }
+}
+
+function isMac() {
+  const os = require('os');
+  return (os.platform() === 'darwin');
+}

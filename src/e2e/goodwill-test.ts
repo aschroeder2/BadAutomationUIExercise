@@ -11,7 +11,7 @@ describe('test', () => {
   it('should navigate to main page', async () => {
     await mainpage.loadPage();
     const title = await browser.getTitle();
-    expect(title).toContain('shopgoodwill.com');
+    expect(title).toContain('ShopGoodwill.com');
   });
 
   it('should search for item', async () => {
@@ -19,7 +19,7 @@ describe('test', () => {
   });
 
   it('should change sort order', async () => {
-    expect(await mainpage.changeSortOrder('Sort by price: highest first')).toBe(true);
+    expect(await mainpage.changeSortOrder('Price: Lowest First')).toBe(true);
   });
 
 });
